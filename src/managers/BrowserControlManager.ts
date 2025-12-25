@@ -49,6 +49,8 @@ export class BrowserControlManager {
   }
 
   async invoke(params: InvokeParams): Promise<any> {
+    const startTime = Date.now();
+    
     if (!this.page) {
       throw new Error('Browser not initialized');
     }
@@ -70,6 +72,10 @@ export class BrowserControlManager {
       this.page,
       processedWorkflow.steps
     );
+
+    const endTime = Date.now();
+    const timeTaken = endTime - startTime;
+    console.log(`Invoke execution completed in ${timeTaken}ms (${(timeTaken / 1000).toFixed(2)}s)`);
 
     return results;
   }

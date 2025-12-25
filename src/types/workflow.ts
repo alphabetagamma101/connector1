@@ -5,7 +5,7 @@ export interface WorkflowDefinition {
 }
 
 export interface WorkflowStep {
-  type: 'type_content' | 'move_mouse_and_click' | 'wait' | 'wait_till_present';
+  type: 'type_content' | 'move_mouse_and_click' | 'wait' | 'wait_till_present' | 'result';
   locator?: string;
   locatorIndex?: string;
   content?: string;

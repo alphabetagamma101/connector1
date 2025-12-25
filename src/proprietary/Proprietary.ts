@@ -36,6 +36,10 @@ export class Proprietary {
             "type" : "move_mouse_and_click",
             "locatorIndex" : "last",
             "locator" : "button[aria-label='Copy']"
+          },
+          {
+            "type" : "result",
+            "content" : "clipboard"
           }
         ]
       });

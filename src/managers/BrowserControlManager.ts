@@ -51,8 +51,19 @@ export class BrowserControlManager {
   async invoke(params: InvokeParams): Promise<any> {
     const startTime = Date.now();
     
-    if (!this.page) {
-      throw new Error('Browser not initialized');
+    if (!this.page || this.page.isClosed()) {
+      // Recreate page if it was closed or detached
+      if (this.browser) {
+        this.page = await this.browser.newPage();
+        await this.page.evaluateOnNewDocument(() => {
+          // @ts-ignore - navigator exists in browser context
+          Object.defineProperty(Object.getPrototypeOf(navigator), 'webdriver', {
+            get: () => false,
+          });
+        });
+      } else {
+        throw new Error('Browser not initialized');
+      }
     }
 
     // Get workflow definition from FlavorManager

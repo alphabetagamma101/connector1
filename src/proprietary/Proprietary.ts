@@ -9,7 +9,7 @@ export class Proprietary {
     // - Any custom logic specific to your use case
     
     // For now, returning a sample JSON string based on URL matching
-    if (url.includes('cnn.com')) {
+    if (url.includes('chatgpt.com')) {
       return JSON.stringify({
         url: url,
         "steps" : [

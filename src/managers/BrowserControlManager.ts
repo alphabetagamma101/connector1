@@ -75,9 +75,26 @@ export class BrowserControlManager {
   }
 
   private replacePlaceholders(workflow: WorkflowDefinition, content: string): WorkflowDefinition {
-    const workflowStr = JSON.stringify(workflow);
-    const replaced = workflowStr.replace(/PH_CONTENT/g, content);
-    return JSON.parse(replaced);
+    // Create a deep copy of the workflow
+    const workflowCopy = JSON.parse(JSON.stringify(workflow));
+    
+    // Recursively replace placeholders in the workflow object
+    const replaceInObject = (obj: any): any => {
+      if (typeof obj === 'string') {
+        return obj.replace(/PH_CONTENT/g, content);
+      } else if (Array.isArray(obj)) {
+        return obj.map(item => replaceInObject(item));
+      } else if (typeof obj === 'object' && obj !== null) {
+        const newObj: any = {};
+        for (const key in obj) {
+          newObj[key] = replaceInObject(obj[key]);
+        }
+        return newObj;
+      }
+      return obj;
+    };
+    
+    return replaceInObject(workflowCopy);
   }
 
   async close(): Promise<void> {

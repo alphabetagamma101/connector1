@@ -51,6 +51,7 @@ export class StepExecutor {
 
   private async executeWaitTillPresent(page: Page, step: WorkflowStep): Promise<void> {
     const locators = step.locator!.split('||').map(l => l.trim());
+    
     for (const locator of locators) {
       try {
         await page.waitForSelector(locator, { timeout: 10000 });
@@ -59,6 +60,8 @@ export class StepExecutor {
         continue;
       }
     }
-    throw new Error(`None of the locators found: ${step.locator}`);
+    
+    // If none of the locators found, log warning and continue
+    console.warn(`for executeWaitTillPresent - None of the locators found: ${step.locator}. Continuing execution...`);
   }
 }

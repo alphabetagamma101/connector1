@@ -7,6 +7,8 @@ const router = Router();
 
 router.post('/invoke', async (req: Request, res: Response) => {
   try {
+    console.log('Incoming request to /api/invoke:', JSON.stringify(req.body, null, 2));
+    
     const { content, url, flavor } = req.body;
 
     // Validate request

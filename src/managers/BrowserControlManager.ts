@@ -11,8 +11,7 @@ puppeteer.use(StealthPlugin());
 
 interface InvokeParams {
   content: string;
-  url?: string;
-  flavor?: string;
+  url: string;
 }
 
 export class BrowserControlManager {
@@ -67,10 +66,7 @@ export class BrowserControlManager {
     }
 
     // Get workflow definition from FlavorManager
-    const workflow = await this.flavorManager.getWorkflow(
-      params.url,
-      params.flavor
-    );
+    const workflow = await this.flavorManager.getWorkflow(params.url);
 
     // Replace placeholders in workflow
     const processedWorkflow = this.replacePlaceholders(workflow, params.content);

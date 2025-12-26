@@ -12,16 +12,8 @@ export class FlavorManager {
     this.proprietary = new Proprietary();
   }
 
-  async getWorkflow(url?: string, flavor?: string): Promise<WorkflowDefinition> {
-    if (flavor && this.flavorConfigs.has(flavor)) {
-      return this.flavorConfigs.get(flavor)!;
-    }
-
-    if (url) {
-      return this.getWorkflowByUrl(url);
-    }
-
-    throw new Error('No valid workflow found for given url or flavor');
+  async getWorkflow(url: string): Promise<WorkflowDefinition> {
+    return this.getWorkflowByUrl(url);
   }
 
   private async getWorkflowByUrl(url: string): Promise<WorkflowDefinition> {

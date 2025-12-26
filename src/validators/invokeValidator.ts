@@ -1,8 +1,7 @@
 // src/validators/invokeValidator.ts
 interface InvokeRequest {
   content: string;
-  url?: string;
-  flavor?: string;
+  url: string;
 }
 
 interface ValidationResult {
@@ -15,8 +14,8 @@ export function validateInvokeRequest(body: any): ValidationResult {
     return { valid: false, error: 'content is required' };
   }
 
-  if (!body.url && !body.flavor) {
-    return { valid: false, error: 'Either url or flavor must be provided' };
+  if (!body.url) {
+    return { valid: false, error: 'url is required' };
   }
 
   return { valid: true };

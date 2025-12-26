@@ -9,7 +9,7 @@ router.post('/invoke', async (req: Request, res: Response) => {
   try {
     console.log('Incoming request to /api/invoke:', JSON.stringify(req.body, null, 2));
     
-    const { content, url, flavor } = req.body;
+    const { content, url } = req.body;
 
     // Validate request
     const validation = validateInvokeRequest(req.body);
@@ -22,8 +22,7 @@ router.post('/invoke', async (req: Request, res: Response) => {
     // Execute the browser automation
     const result = await browserManager.invoke({
       content,
-      url,
-      flavor
+      url
     });
 
     res.json({ success: true, result });

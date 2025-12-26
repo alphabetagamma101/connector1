@@ -44,6 +44,10 @@ export class Proprietary {
             "type" : "scroll_rightmost_to_bottom"
           },
           {
+            "type" : "wait",
+            "waitTimeInMillis" : "500"
+          },
+          {
             "type" : "move_mouse_and_click",
             "locatorIndex" : "last",
             "locator" : "button[aria-label='Copy']"

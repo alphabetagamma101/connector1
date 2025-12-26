@@ -7,9 +7,17 @@ export class Proprietary {
     // - Making an API call
     // - Reading from files
     // - Any custom logic specific to your use case
-    
+
     // For now, returning a sample JSON string based on URL matching
     if (url.includes('chatgpt.com')) {
+      return this.get_json_for_chatgpt(url)
+    }
+
+    // Default fallback
+    throw new Error(`No workflow JSON found for URL: ${url}`);
+  }
+
+  get_json_for_chatgpt(url: string) {
       return JSON.stringify({
         url: url,
         "steps" : [
@@ -38,14 +46,14 @@ export class Proprietary {
             "locator" : "button[aria-label='Copy']"
           },
           {
+            "type" : "wait",
+            "waitTimeInMillis" : "2000"
+          },
+          {
             "type" : "result",
             "content" : "clipboard"
           }
         ]
       });
     }
-    
-    // Default fallback
-    throw new Error(`No workflow JSON found for URL: ${url}`);
-  }
 }

@@ -40,7 +40,7 @@ router.post('/invoke', async (req: Request, res: Response) => {
     // Process results before sending response
     const finalResult = processResults(result);
     
-    res.json({ success: true, result: finalResult });
+    res.json({ success: true, content: finalResult, url: url });
   } catch (error) {
     console.error('Error in /api/invoke:', error);
     res.status(500).json({ 

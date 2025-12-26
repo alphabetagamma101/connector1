@@ -4,3 +4,5 @@
 *-lock.json
 dist/
 node_modules/
+/all_files_code.tmp
+/all_files_code_LISTING.tmp

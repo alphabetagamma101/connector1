@@ -45,7 +45,7 @@ export class Proprietary {
           },
           {
             "type" : "wait",
-            "waitTimeInMillis" : "500"
+            "waitTimeInMillis" : "2000"
           },
           {
             "type" : "move_mouse_and_click",

@@ -125,28 +125,30 @@ export class StepExecutor {
 
   private async executeScrollRightmostToBottom(page: Page, step: WorkflowStep): Promise<any> {
     await page.evaluate(() => {
-      // Get all elements in the document
       // @ts-ignore - document exists in browser context
-      const allElements = Array.from(document.querySelectorAll('*'));
-      
-      // Find the rightmost element
-      let rightmostElement: any = null;
+      const allElements = document.querySelectorAll('*');
+      let rightmostScrollable: any = null;
       let maxRight = -1;
-      
-      for (const element of allElements) {
-        // @ts-ignore - element has getBoundingClientRect in browser context
-        const rect = element.getBoundingClientRect();
-        const rightEdge = rect.right;
-        
-        if (rightEdge > maxRight) {
-          maxRight = rightEdge;
-          rightmostElement = element;
+
+      allElements.forEach((element: any) => {
+        const hasVerticalScrollbar = element.scrollHeight > element.clientHeight;
+        // @ts-ignore - window exists in browser context
+        const overflowY = window.getComputedStyle(element).overflowY;
+        const isScrollable = hasVerticalScrollbar && (overflowY === 'scroll' || overflowY === 'auto');
+
+        if (isScrollable) {
+          const rect = element.getBoundingClientRect();
+          const rightEdge = rect.right;
+
+          if (rightEdge > maxRight) {
+            maxRight = rightEdge;
+            rightmostScrollable = element;
+          }
         }
-      }
-      
-      // Scroll the rightmost element to the bottom
-      if (rightmostElement) {
-        rightmostElement.scrollTop = rightmostElement.scrollHeight;
+      });
+
+      if (rightmostScrollable) {
+        rightmostScrollable.scrollTop = rightmostScrollable.scrollHeight;
       }
     });
   }

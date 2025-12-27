@@ -5,13 +5,13 @@ import * as path from 'path';
 let currentMockFileIndex = 0;
 
 const mockFiles = [
-  'mock1.txt',
-  'mock2.txt',
-  'mock3.txt'
+  path.join(__dirname, '../mocks/mock1.txt'),
+  path.join(__dirname, '../mocks/mock2.txt'),
+  path.join(__dirname, '../mocks/mock3.txt')
 ];
 
 export async function performInvokemock(content: string): Promise<string> {
-  const mockFilePath = path.resolve(mockFiles[currentMockFileIndex]);
+  const mockFilePath = mockFiles[currentMockFileIndex];
 
   if (!fs.existsSync(mockFilePath)) {
     throw new Error(`Mock file not found: ${mockFilePath}`);

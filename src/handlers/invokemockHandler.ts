@@ -5,9 +5,9 @@ import * as path from 'path';
 let currentMockFileIndex = 0;
 
 const mockFiles = [
-  path.join(__dirname, '../mocks/mock1.txt'),
-  path.join(__dirname, '../mocks/mock2.txt'),
-  path.join(__dirname, '../mocks/mock3.txt')
+  path.join(__dirname, '../secret/mocks/mock1.txt'),
+  path.join(__dirname, '../secret/mocks/mock2.txt'),
+  path.join(__dirname, '../secret/mocks/mock3.txt')
 ];
 
 export async function performInvokemock(content: string): Promise<string> {

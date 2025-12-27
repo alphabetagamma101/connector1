@@ -47,7 +47,7 @@ export class BrowserControlManager {
     console.log('Puppeteer browser initialized with stealth plugin');
   }
 
-  async invoke(params: InvokeParams): Promise<any> {
+  async invoke(params: InvokeParams): Promise<any[]> {
     const startTime = Date.now();
     
     if (!this.page || this.page.isClosed()) {
@@ -85,6 +85,13 @@ export class BrowserControlManager {
     console.log(`Invoke execution completed in ${timeTaken}ms (${(timeTaken / 1000).toFixed(2)}s)`);
 
     return results;
+  }
+
+  async getCurrentUrl(): Promise<string> {
+    if (!this.page || this.page.isClosed()) {
+      throw new Error('Page not available');
+    }
+    return this.page.url();
   }
 
   private replacePlaceholders(workflow: WorkflowDefinition, content: string): WorkflowDefinition {

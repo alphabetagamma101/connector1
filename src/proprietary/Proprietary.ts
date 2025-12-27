@@ -37,7 +37,7 @@ export class Proprietary {
           {
             "type" : "wait_till_appears",
             "locatorIndex" : "last",
-            "locator" : "span:has-text('Voice')",
+            "locator" : "button[aria-label='Start voice mode']",
             "timeout" : "180000"
           },
           {
